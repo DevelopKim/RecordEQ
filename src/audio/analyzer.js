@@ -4,6 +4,7 @@ const MIN_FREQ = 20;
 const MAX_FREQ = 20000;
 const PEAK_DECAY = 0.004;
 const SMOOTH = 0.82;
+const NOISE_FLOOR = 0.05;
 
 export class AudioAnalyzer {
   constructor() {
@@ -40,6 +41,8 @@ export class AudioAnalyzer {
     this._analyser = this._ctx.createAnalyser();
     this._analyser.fftSize = FFT_SIZE;
     this._analyser.smoothingTimeConstant = 0;
+    this._analyser.minDecibels = -75;
+    this._analyser.maxDecibels = -10;
     this._freqData = new Uint8Array(this._analyser.frequencyBinCount);
     this._timeData = new Uint8Array(FFT_SIZE);
 
@@ -82,8 +85,9 @@ export class AudioAnalyzer {
       let count = bHigh - bLow + 1;
       for (let b = bLow; b <= bHigh; b++) sum += this._freqData[b];
       const raw = count > 0 ? (sum / count) / 255 : 0;
+      const gated = raw > NOISE_FLOOR ? raw : 0;
 
-      this._smoothed[i] = this._smoothed[i] * SMOOTH + raw * (1 - SMOOTH);
+      this._smoothed[i] = this._smoothed[i] * SMOOTH + gated * (1 - SMOOTH);
       this.bands[i] = this._smoothed[i];
     }
 
