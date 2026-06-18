@@ -75,7 +75,7 @@ export class OverlayRenderer {
     ctx.letterSpacing = '1px';
 
     for (let i = 0; i < FREQ_LABELS.length; i++) {
-      const x = freqToX(FREQ_VALUES[i], 20, 20000, padX, drawW);
+      const x = freqToX(FREQ_VALUES[i], 20, MAX_DISPLAY_FREQ, padX, drawW);
       ctx.fillText(FREQ_LABELS[i], x, H - padBottom * 0.25);
     }
 

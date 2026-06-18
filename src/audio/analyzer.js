@@ -31,9 +31,11 @@ export class AudioAnalyzer {
     silentSrc.connect(this._ctx.destination);
     silentSrc.start(0);
 
-    // Request mic then complete setup — on any failure release all acquired resources
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+    // Request mic then complete setup — wrap entire flow so any failure cleans up all resources
+    let stream;
     try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+
       if (this._ctx.state !== 'running') {
         await this._ctx.resume();
       }
@@ -49,7 +51,7 @@ export class AudioAnalyzer {
       const source = this._ctx.createMediaStreamSource(stream);
       source.connect(this._analyser);
     } catch (e) {
-      stream.getTracks().forEach(t => t.stop());
+      if (stream) stream.getTracks().forEach(t => t.stop());
       this._ctx.close();
       this._ctx = null;
       throw e;
