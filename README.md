@@ -17,7 +17,7 @@ Run it on a monitor in the background while recording, and it reacts to your mic
 
 I wanted to record videos with my computer screen in the background — but the screen looked painfully boring. Something had to move. So I built this. There's no recording, no mixing, no analysis. It's purely, shamelessly aesthetic. 🎛️
 
-<video src="assets/demo.mp4" autoplay loop muted playsinline width="100%"></video>
+<video src="https://github.com/user-attachments/assets/64e9361f-87cc-45ee-8f08-5a3a68af958a" controls autoplay loop muted playsinline width="100%"></video>
 
 ---
 
