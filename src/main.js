@@ -1,38 +1,47 @@
 import { AudioAnalyzer } from './audio/analyzer.js';
 import { EQBarsRenderer } from './ui/eqBars.js';
+import { SpectrumFillRenderer } from './ui/spectrumFill.js';
+import { NeonBarsRenderer } from './ui/neonBars.js';
 import { WaveformRenderer } from './ui/waveform.js';
 import { OverlayRenderer } from './ui/overlay.js';
+import { ThemeManager } from './ui/themeManager.js';
 
+const eqCanvas = document.getElementById('eq-canvas');
 const analyzer = new AudioAnalyzer();
-const eqBars = new EQBarsRenderer(document.getElementById('eq-canvas'));
+const themeManager = new ThemeManager({
+  classic: new EQBarsRenderer(eqCanvas),
+  wave:    new SpectrumFillRenderer(eqCanvas),
+  fire:    new NeonBarsRenderer(eqCanvas),
+});
 const waveform = new WaveformRenderer(document.getElementById('wave-canvas'));
-const overlay = new OverlayRenderer(document.getElementById('bg-canvas'));
+const overlay  = new OverlayRenderer(document.getElementById('bg-canvas'));
 
 const statusBadge = document.getElementById('status-badge');
 const startScreen = document.getElementById('start-screen');
-const micBtn = document.getElementById('mic-btn');
+const micBtn      = document.getElementById('mic-btn');
+const themeBtns   = document.querySelectorAll('.theme-btn');
 
 let lastTime = performance.now();
 let running = false;
 
 function setStatus(mode) {
-  if (mode === 'live') {
-    statusBadge.textContent = '● LIVE';
-    statusBadge.className = 'live';
-  } else {
-    statusBadge.textContent = '● DEMO';
-    statusBadge.className = 'demo';
-  }
+  statusBadge.textContent = mode === 'live' ? '● LIVE' : '● DEMO';
+  statusBadge.className   = mode;
+}
+
+function applyTheme(name) {
+  themeManager.set(name);
+  themeBtns.forEach(btn =>
+    btn.classList.toggle('active', btn.dataset.theme === name)
+  );
 }
 
 function loop(now) {
   const dt = (now - lastTime) / 1000;
   lastTime = now;
-
   analyzer.tick(dt);
-  eqBars.draw(analyzer.bands, analyzer.peaks);
+  themeManager.getRenderer().draw(analyzer.bands, analyzer.peaks);
   waveform.draw(analyzer.waveform);
-
   requestAnimationFrame(loop);
 }
 
@@ -52,12 +61,19 @@ async function connectMic() {
 
 micBtn.addEventListener('click', connectMic);
 
-// "또는 DEMO 모드로 계속" 클릭
 startScreen.querySelector('p').addEventListener('click', () => {
   startScreen.classList.add('hidden');
 });
 
-// init: start in demo mode immediately
+themeBtns.forEach(btn =>
+  btn.addEventListener('click', () => applyTheme(btn.dataset.theme))
+);
+
+// T key cycles themes
+document.addEventListener('keydown', e => {
+  if (e.key === 't' || e.key === 'T') applyTheme(themeManager.next());
+});
+
 analyzer.startDemo();
 setStatus('demo');
 overlay.draw();
