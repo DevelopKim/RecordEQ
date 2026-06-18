@@ -31,8 +31,15 @@ export class AudioAnalyzer {
     silentSrc.connect(this._ctx.destination);
     silentSrc.start(0);
 
-    // Now request mic
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+    // Now request mic — close context on failure to prevent resource leak on retry
+    let stream;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+    } catch (e) {
+      this._ctx.close();
+      this._ctx = null;
+      throw e;
+    }
 
     if (this._ctx.state !== 'running') {
       await this._ctx.resume();
