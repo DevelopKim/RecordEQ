@@ -58,6 +58,10 @@ npm run dev
 
 Requires Rust toolchain and Tauri CLI. See [Tauri prerequisites](https://tauri.app/start/prerequisites/).
 
+## Built with
+
+This project was developed in collaboration with [Claude](https://claude.ai) (Anthropic). Prompting, iterating, and shipping — as a team.
+
 ## Notes
 
 - macOS only (uses WKWebView)

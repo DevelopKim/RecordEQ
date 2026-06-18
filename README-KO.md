@@ -58,6 +58,10 @@ npm run dev
 
 Rust 툴체인과 Tauri CLI가 필요합니다. [Tauri 사전 준비 사항](https://tauri.app/start/prerequisites/)을 참고하세요.
 
+## 개발 방식
+
+이 프로젝트는 [Claude](https://claude.ai)(Anthropic)와 함께 개발했습니다. 기획부터 구현, 디버깅까지 AI와 협업한 결과물입니다.
+
 ## 참고
 
 - macOS 전용 (WKWebView 기반)
