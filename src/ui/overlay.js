@@ -1,5 +1,6 @@
-const FREQ_LABELS = ['20', '50', '100', '200', '500', '1k', '2k', '5k', '10k', '20k'];
-const FREQ_VALUES = [20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000];
+const FREQ_LABELS = ['20', '50', '100', '200', '500', '1k', '2k'];
+const FREQ_VALUES = [20, 50, 100, 200, 500, 1000, 2000];
+const MAX_DISPLAY_FREQ = 2000;
 const DB_LABELS = ['0', '-12', '-24', '-36'];
 const DB_POSITIONS = [0, 0.33, 0.66, 1.0];
 
@@ -57,7 +58,7 @@ export class OverlayRenderer {
     }
 
     for (const freq of FREQ_VALUES) {
-      const x = freqToX(freq, 20, 20000, padX, drawW);
+      const x = freqToX(freq, 20, MAX_DISPLAY_FREQ, padX, drawW);
       ctx.beginPath();
       ctx.moveTo(x, padTop);
       ctx.lineTo(x, padTop + availH);

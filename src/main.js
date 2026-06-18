@@ -2,6 +2,7 @@ import { AudioAnalyzer } from './audio/analyzer.js';
 import { EQBarsRenderer } from './ui/eqBars.js';
 import { SpectrumFillRenderer } from './ui/spectrumFill.js';
 import { NeonBarsRenderer } from './ui/neonBars.js';
+import { RainbowBarsRenderer } from './ui/rainbowBars.js';
 import { WaveformRenderer } from './ui/waveform.js';
 import { OverlayRenderer } from './ui/overlay.js';
 import { ThemeManager } from './ui/themeManager.js';
@@ -12,6 +13,7 @@ const themeManager = new ThemeManager({
   classic: new EQBarsRenderer(eqCanvas),
   wave:    new SpectrumFillRenderer(eqCanvas),
   fire:    new NeonBarsRenderer(eqCanvas),
+  rainbow: new RainbowBarsRenderer(eqCanvas),
 });
 const waveform = new WaveformRenderer(document.getElementById('wave-canvas'));
 const overlay  = new OverlayRenderer(document.getElementById('bg-canvas'));
@@ -69,9 +71,18 @@ themeBtns.forEach(btn =>
   btn.addEventListener('click', () => applyTheme(btn.dataset.theme))
 );
 
-// T key cycles themes
-document.addEventListener('keydown', e => {
-  if (e.key === 't' || e.key === 'T') applyTheme(themeManager.next());
+// T key cycles themes, F key toggles fullscreen
+document.addEventListener('keydown', async e => {
+  if (e.key === 't' || e.key === 'T') {
+    applyTheme(themeManager.next());
+  }
+  if (e.key === 'f' || e.key === 'F') {
+    const win = window.__TAURI__?.window?.getCurrentWindow?.();
+    if (win) {
+      const full = await win.isFullscreen();
+      await win.setFullscreen(!full);
+    }
+  }
 });
 
 analyzer.startDemo();

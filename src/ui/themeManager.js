@@ -1,4 +1,4 @@
-export const THEMES = ['classic', 'wave', 'fire'];
+export const THEMES = ['classic', 'wave', 'fire', 'rainbow'];
 
 export class ThemeManager {
   constructor(renderers) {
