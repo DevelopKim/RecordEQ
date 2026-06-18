@@ -1,5 +1,10 @@
 **English | [한국어](./README-KO.md)**
 
+<p align="center">
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License"></a>
+  <img src="https://img.shields.io/badge/README-EN%20%7C%20KO-lightgrey" alt="Language">
+</p>
+
 # RecordEQ
 
 A real-time audio EQ visualizer built with Tauri v2 for macOS.

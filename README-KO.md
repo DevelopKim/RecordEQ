@@ -1,5 +1,10 @@
 **[English](./README.md) | 한국어**
 
+<p align="center">
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License"></a>
+  <img src="https://img.shields.io/badge/README-EN%20%7C%20KO-lightgrey" alt="Language">
+</p>
+
 # RecordEQ
 
 Tauri v2로 제작한 macOS용 실시간 오디오 EQ 비주얼라이저입니다.
