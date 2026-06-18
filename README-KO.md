@@ -1,3 +1,5 @@
+**[English](./README.md) | [한국어](./README-KO.md)**
+
 # RecordEQ
 
 Tauri v2로 제작한 macOS용 실시간 오디오 EQ 비주얼라이저입니다.

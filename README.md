@@ -1,3 +1,5 @@
+**[English](./README.md) | [한국어](./README-KO.md)**
+
 # RecordEQ
 
 A real-time audio EQ visualizer built with Tauri v2 for macOS.
