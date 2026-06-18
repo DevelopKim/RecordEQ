@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Shared bottom-to-top gradient: green → yellow → red -->
+    <linearGradient id="barGrad" x1="0" y1="1" x2="0" y2="0" gradientUnits="objectBoundingBox">
+      <stop offset="0%"   stop-color="#00FF66"/>
+      <stop offset="62%"  stop-color="#00FF66"/>
+      <stop offset="78%"  stop-color="#FFCC00"/>
+      <stop offset="100%" stop-color="#FF3333"/>
+    </linearGradient>
+
+    <!-- Neon glow -->
+    <filter id="glow" x="-40%" y="-10%" width="180%" height="120%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Subtle outer vignette via radial gradient -->
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="0%"   stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" fill="#050505"/>
+
+  <!-- Baseline -->
+  <rect x="112" y="876" width="800" height="4" fill="#111"/>
+
+  <!-- 5 EQ bars: mountain peak shape, bar w=130px gap=70px -->
+  <!-- x positions: 112, 312, 512, 712, 782  ... recalc:
+       total = 5*130 + 4*70 = 930 → center: (1024-930)/2 = 47
+       x: 47, 247, 447, 647, 847 -->
+
+  <!-- Bar 1  h=280 -->
+  <rect x="47"  y="596" width="130" height="280" fill="url(#barGrad)" filter="url(#glow)"/>
+  <!-- Bar 2  h=440 -->
+  <rect x="247" y="436" width="130" height="440" fill="url(#barGrad)" filter="url(#glow)"/>
+  <!-- Bar 3  h=590 (tallest) -->
+  <rect x="447" y="286" width="130" height="590" fill="url(#barGrad)" filter="url(#glow)"/>
+  <!-- Bar 4  h=390 -->
+  <rect x="647" y="486" width="130" height="390" fill="url(#barGrad)" filter="url(#glow)"/>
+  <!-- Bar 5  h=220 -->
+  <rect x="847" y="656" width="130" height="220" fill="url(#barGrad)" filter="url(#glow)"/>
+
+  <!-- Segment dividers (horizontal black lines to simulate LED segments) -->
+  <!-- Applied over bars: 28 segments → segment height = 590/28 ≈ 21px; gap ≈ 3px -->
+  <g fill="#050505" opacity="0.7">
+    <!-- Generate segment lines across full bar area y=286 to y=880 every 21px -->
+    <rect x="47"  y="307" width="130" height="3"/>
+    <rect x="47"  y="328" width="130" height="3"/>
+    <rect x="47"  y="349" width="130" height="3"/>
+    <rect x="47"  y="370" width="130" height="3"/>
+    <rect x="47"  y="391" width="130" height="3"/>
+    <rect x="47"  y="412" width="130" height="3"/>
+    <rect x="47"  y="433" width="130" height="3"/>
+    <rect x="47"  y="454" width="130" height="3"/>
+    <rect x="47"  y="475" width="130" height="3"/>
+    <rect x="47"  y="496" width="130" height="3"/>
+    <rect x="47"  y="517" width="130" height="3"/>
+    <rect x="47"  y="538" width="130" height="3"/>
+    <rect x="47"  y="559" width="130" height="3"/>
+    <rect x="47"  y="580" width="130" height="3"/>
+    <rect x="47"  y="601" width="130" height="3"/>
+    <rect x="47"  y="622" width="130" height="3"/>
+    <rect x="47"  y="643" width="130" height="3"/>
+    <rect x="47"  y="664" width="130" height="3"/>
+    <rect x="47"  y="685" width="130" height="3"/>
+    <rect x="47"  y="706" width="130" height="3"/>
+    <rect x="47"  y="727" width="130" height="3"/>
+    <rect x="47"  y="748" width="130" height="3"/>
+    <rect x="47"  y="769" width="130" height="3"/>
+    <rect x="47"  y="790" width="130" height="3"/>
+    <rect x="47"  y="811" width="130" height="3"/>
+    <rect x="47"  y="832" width="130" height="3"/>
+    <rect x="47"  y="853" width="130" height="3"/>
+
+    <rect x="247" y="307" width="130" height="3"/>
+    <rect x="247" y="328" width="130" height="3"/>
+    <rect x="247" y="349" width="130" height="3"/>
+    <rect x="247" y="370" width="130" height="3"/>
+    <rect x="247" y="391" width="130" height="3"/>
+    <rect x="247" y="412" width="130" height="3"/>
+    <rect x="247" y="433" width="130" height="3"/>
+    <rect x="247" y="454" width="130" height="3"/>
+    <rect x="247" y="475" width="130" height="3"/>
+    <rect x="247" y="496" width="130" height="3"/>
+    <rect x="247" y="517" width="130" height="3"/>
+    <rect x="247" y="538" width="130" height="3"/>
+    <rect x="247" y="559" width="130" height="3"/>
+    <rect x="247" y="580" width="130" height="3"/>
+    <rect x="247" y="601" width="130" height="3"/>
+    <rect x="247" y="622" width="130" height="3"/>
+    <rect x="247" y="643" width="130" height="3"/>
+    <rect x="247" y="664" width="130" height="3"/>
+    <rect x="247" y="685" width="130" height="3"/>
+    <rect x="247" y="706" width="130" height="3"/>
+    <rect x="247" y="727" width="130" height="3"/>
+    <rect x="247" y="748" width="130" height="3"/>
+    <rect x="247" y="769" width="130" height="3"/>
+    <rect x="247" y="790" width="130" height="3"/>
+    <rect x="247" y="811" width="130" height="3"/>
+    <rect x="247" y="832" width="130" height="3"/>
+    <rect x="247" y="853" width="130" height="3"/>
+
+    <rect x="447" y="307" width="130" height="3"/>
+    <rect x="447" y="328" width="130" height="3"/>
+    <rect x="447" y="349" width="130" height="3"/>
+    <rect x="447" y="370" width="130" height="3"/>
+    <rect x="447" y="391" width="130" height="3"/>
+    <rect x="447" y="412" width="130" height="3"/>
+    <rect x="447" y="433" width="130" height="3"/>
+    <rect x="447" y="454" width="130" height="3"/>
+    <rect x="447" y="475" width="130" height="3"/>
+    <rect x="447" y="496" width="130" height="3"/>
+    <rect x="447" y="517" width="130" height="3"/>
+    <rect x="447" y="538" width="130" height="3"/>
+    <rect x="447" y="559" width="130" height="3"/>
+    <rect x="447" y="580" width="130" height="3"/>
+    <rect x="447" y="601" width="130" height="3"/>
+    <rect x="447" y="622" width="130" height="3"/>
+    <rect x="447" y="643" width="130" height="3"/>
+    <rect x="447" y="664" width="130" height="3"/>
+    <rect x="447" y="685" width="130" height="3"/>
+    <rect x="447" y="706" width="130" height="3"/>
+    <rect x="447" y="727" width="130" height="3"/>
+    <rect x="447" y="748" width="130" height="3"/>
+    <rect x="447" y="769" width="130" height="3"/>
+    <rect x="447" y="790" width="130" height="3"/>
+    <rect x="447" y="811" width="130" height="3"/>
+    <rect x="447" y="832" width="130" height="3"/>
+    <rect x="447" y="853" width="130" height="3"/>
+
+    <rect x="647" y="307" width="130" height="3"/>
+    <rect x="647" y="328" width="130" height="3"/>
+    <rect x="647" y="349" width="130" height="3"/>
+    <rect x="647" y="370" width="130" height="3"/>
+    <rect x="647" y="391" width="130" height="3"/>
+    <rect x="647" y="412" width="130" height="3"/>
+    <rect x="647" y="433" width="130" height="3"/>
+    <rect x="647" y="454" width="130" height="3"/>
+    <rect x="647" y="475" width="130" height="3"/>
+    <rect x="647" y="496" width="130" height="3"/>
+    <rect x="647" y="517" width="130" height="3"/>
+    <rect x="647" y="538" width="130" height="3"/>
+    <rect x="647" y="559" width="130" height="3"/>
+    <rect x="647" y="580" width="130" height="3"/>
+    <rect x="647" y="601" width="130" height="3"/>
+    <rect x="647" y="622" width="130" height="3"/>
+    <rect x="647" y="643" width="130" height="3"/>
+    <rect x="647" y="664" width="130" height="3"/>
+    <rect x="647" y="685" width="130" height="3"/>
+    <rect x="647" y="706" width="130" height="3"/>
+    <rect x="647" y="727" width="130" height="3"/>
+    <rect x="647" y="748" width="130" height="3"/>
+    <rect x="647" y="769" width="130" height="3"/>
+    <rect x="647" y="790" width="130" height="3"/>
+    <rect x="647" y="811" width="130" height="3"/>
+    <rect x="647" y="832" width="130" height="3"/>
+    <rect x="647" y="853" width="130" height="3"/>
+
+    <rect x="847" y="307" width="130" height="3"/>
+    <rect x="847" y="328" width="130" height="3"/>
+    <rect x="847" y="349" width="130" height="3"/>
+    <rect x="847" y="370" width="130" height="3"/>
+    <rect x="847" y="391" width="130" height="3"/>
+    <rect x="847" y="412" width="130" height="3"/>
+    <rect x="847" y="433" width="130" height="3"/>
+    <rect x="847" y="454" width="130" height="3"/>
+    <rect x="847" y="475" width="130" height="3"/>
+    <rect x="847" y="496" width="130" height="3"/>
+    <rect x="847" y="517" width="130" height="3"/>
+    <rect x="847" y="538" width="130" height="3"/>
+    <rect x="847" y="559" width="130" height="3"/>
+    <rect x="847" y="580" width="130" height="3"/>
+    <rect x="847" y="601" width="130" height="3"/>
+    <rect x="847" y="622" width="130" height="3"/>
+    <rect x="847" y="643" width="130" height="3"/>
+    <rect x="847" y="664" width="130" height="3"/>
+    <rect x="847" y="685" width="130" height="3"/>
+    <rect x="847" y="706" width="130" height="3"/>
+    <rect x="847" y="727" width="130" height="3"/>
+    <rect x="847" y="748" width="130" height="3"/>
+    <rect x="847" y="769" width="130" height="3"/>
+    <rect x="847" y="790" width="130" height="3"/>
+    <rect x="847" y="811" width="130" height="3"/>
+    <rect x="847" y="832" width="130" height="3"/>
+    <rect x="847" y="853" width="130" height="3"/>
+  </g>
+
+  <!-- Vignette overlay -->
+  <rect width="1024" height="1024" fill="url(#vignette)"/>
+</svg>
