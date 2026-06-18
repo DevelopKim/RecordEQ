@@ -31,30 +31,29 @@ export class AudioAnalyzer {
     silentSrc.connect(this._ctx.destination);
     silentSrc.start(0);
 
-    // Now request mic — close context on failure to prevent resource leak on retry
-    let stream;
+    // Request mic then complete setup — on any failure release all acquired resources
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
     try {
-      stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+      if (this._ctx.state !== 'running') {
+        await this._ctx.resume();
+      }
+
+      this._analyser = this._ctx.createAnalyser();
+      this._analyser.fftSize = FFT_SIZE;
+      this._analyser.smoothingTimeConstant = 0;
+      this._analyser.minDecibels = -75;
+      this._analyser.maxDecibels = -10;
+      this._freqData = new Uint8Array(this._analyser.frequencyBinCount);
+      this._timeData = new Uint8Array(FFT_SIZE);
+
+      const source = this._ctx.createMediaStreamSource(stream);
+      source.connect(this._analyser);
     } catch (e) {
+      stream.getTracks().forEach(t => t.stop());
       this._ctx.close();
       this._ctx = null;
       throw e;
     }
-
-    if (this._ctx.state !== 'running') {
-      await this._ctx.resume();
-    }
-
-    this._analyser = this._ctx.createAnalyser();
-    this._analyser.fftSize = FFT_SIZE;
-    this._analyser.smoothingTimeConstant = 0;
-    this._analyser.minDecibels = -75;
-    this._analyser.maxDecibels = -10;
-    this._freqData = new Uint8Array(this._analyser.frequencyBinCount);
-    this._timeData = new Uint8Array(FFT_SIZE);
-
-    const source = this._ctx.createMediaStreamSource(stream);
-    source.connect(this._analyser);
 
     this._demo = false;
   }
