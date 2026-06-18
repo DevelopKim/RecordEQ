@@ -61,7 +61,18 @@ async function connectMic() {
   }
 }
 
+async function toggleMode() {
+  if (analyzer.isLive) {
+    analyzer.stop();
+    setStatus('demo');
+  } else {
+    startScreen.classList.add('hidden');
+    await connectMic();
+  }
+}
+
 micBtn.addEventListener('click', connectMic);
+statusBadge.addEventListener('click', toggleMode);
 
 startScreen.querySelector('p').addEventListener('click', () => {
   startScreen.classList.add('hidden');

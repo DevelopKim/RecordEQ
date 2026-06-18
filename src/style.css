@@ -108,8 +108,13 @@ canvas {
   padding: 4px 10px;
   border-radius: 20px;
   border: 1px solid currentColor;
-  pointer-events: none;
+  cursor: pointer;
   -webkit-app-region: no-drag;
+  transition: opacity 0.15s;
+}
+
+#status-badge:hover {
+  opacity: 0.75;
 }
 
 #status-badge.demo {

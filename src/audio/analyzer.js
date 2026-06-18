@@ -18,7 +18,10 @@ export class AudioAnalyzer {
     this._timeData = null;
     this._demo = false;
     this._demoPhase = 0;
+    this._stream = null;
   }
+
+  get isLive() { return !this._demo; }
 
   async start() {
     // Create AudioContext synchronously before any await — must stay in user gesture context
@@ -48,6 +51,7 @@ export class AudioAnalyzer {
       this._freqData = new Uint8Array(this._analyser.frequencyBinCount);
       this._timeData = new Uint8Array(FFT_SIZE);
 
+      this._stream = stream;
       const source = this._ctx.createMediaStreamSource(stream);
       source.connect(this._analyser);
     } catch (e) {
@@ -58,6 +62,21 @@ export class AudioAnalyzer {
     }
 
     this._demo = false;
+  }
+
+  stop() {
+    if (this._stream) {
+      this._stream.getTracks().forEach(t => t.stop());
+      this._stream = null;
+    }
+    if (this._ctx) {
+      this._ctx.close();
+      this._ctx = null;
+    }
+    this._analyser = null;
+    this._freqData = null;
+    this._timeData = null;
+    this.startDemo();
   }
 
   startDemo() {

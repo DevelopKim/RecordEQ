@@ -10,3 +10,6 @@ src-tauri/gen/
 
 # Logs
 *.log
+
+# Local notes (not for repo)
+notes/
