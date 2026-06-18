@@ -1,4 +1,4 @@
-**[English](./README.md) | [한국어](./README-KO.md)**
+**[English](./README.md) | 한국어**
 
 # RecordEQ
 
